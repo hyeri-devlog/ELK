@@ -169,7 +169,57 @@ Elasticsearch의 Document는 JSON 형태이고, 검색을 위해 내부적으로
 ---
 
 ## 7. Elasticsearch가 검색이 빠른 이유
+Elasticsearch가 검색을 빠르게 할 수 있는 핵심 이유는 **역색인** 때문이다.  
+Elastic 공식 문서에서는 역색인을 **`각 토큰이 어떤 문서에 포함되어 있는지 매핑하는 데이터 구조`**라고 설명한다.  
 
+일반적인 RDB 검색을 단순화하면 이런 느낌이다.
+
+```
+문서 1: 검정 반팔 티셔츠
+문서 2: 흰색 셔츠
+문서 3: 여름 반팔 니트
+```
+
+사용자가 `반팔`을 검색하면 각 문서를 하나씩 확인해야 한다.
+
+```
+문서 1에 반팔이 있나? 있음
+문서 2에 반팔이 있나? 없음
+문서 3에 반팔이 있나? 있음
+```
+
+반면 Elasticsearch는 데이터를 저장할 때 미리 이런 구조를 만들어 둔다.
+
+```
+검정 → 문서 1
+반팔 → 문서 1, 문서 3
+티셔츠 → 문서 1
+흰색 → 문서 2
+셔츠 → 문서 2
+여름 → 문서 3
+니트 → 문서 3
+```
+
+그래서 `반팔`을 검색하면 바로 알 수 있다.
+
+```
+반팔 -> 문서 1, 문서 3
+```
+
+이 구조가 바로 **역색인, Inverted Index**이다.  
+책 뒤에 있는 '찾아보기'와 비슷하다.  
+책에서 `Docker`라는 단어가 어디 나오는지 찾고 싶을 때 책 전체를 처음부터 끝까지 읽는다.  
+책 뒤의 찾아보기에서 `Docker`를 찾으면 된다.
+
+```
+Docker -> 12쪽, 45쪽, 103쪽
+```
+
+Elasticsearch도 비슷하다.
+
+```
+검색어 -> 해당 검색어가 들어 있는 문서 목록
+```
 
 ---
 
@@ -210,8 +260,28 @@ Elasticsearch의 Document는 JSON 형태이고, 검색을 위해 내부적으로
 
 
 ---
+
 ## 11. Elasticsearch 이해하기
 
 
 ---
+
 ## 12. 정리
+
+---
+
+## 출처
+[Elastic 공식 문서] Elasticsearch 소개
+https://www.elastic.co/elasticsearch
+
+[Elastic 공식 문서] Query DSL
+https://www.elastic.co/docs/explore-analyze/query-filter/languages/querydsl
+
+[Elastic 공식 문서] Full-text search와 Inverted Index 설명
+https://www.elastic.co/docs/solutions/search/full-text/how-full-text-works
+
+[Apache Lucene 공식 사이트] Apache Lucene
+https://lucene.apache.org/
+
+[Apache Lucene 공식 문서] Lucene Core
+https://lucene.apache.org/core/
