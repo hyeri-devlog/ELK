@@ -9,6 +9,8 @@
 > - Elasticsearch가 Apache Lucene 위에서 동작한다는 점을 이해한다
 > - Apache Lucene의 주요 특징을 이해한다
 
+---
+
 ## 2. Elasticsearch란? 
 **`Elasticsearch`는 대량의 데이터를 빠르게 저장, 검색, 분석하기 위한 분산 검색 엔진**이다.
 
@@ -34,6 +36,8 @@ black t-shirt
 이런 검색어들을 단순한 `LIKE` 검색만으로 자연스럽게 처리하기는 어렵다.
 Elasticsearch는 이런 문제를 해결하기 위해 사용한다.
 
+---
+
 ## 3. Elasticsearch를 왜 배워야 할까?
 SpringBoot, RDB만 사용해도 웹 서비스는 만들 수 있다.
 회원가입, 로그인, 게시글, 주문, 결제, 배송 관리 같은 기능은 대부분 RDB로 충분히 구현할 수 있다.
@@ -50,6 +54,8 @@ SpringBoot, RDB만 사용해도 웹 서비스는 만들 수 있다.
 |AI 검색|키워드 검색뿐 아니라 의미 기반 검색, 벡터 검색이 필요함|
 
 즉, Elasticsearch는 데이터를 저장하는 것보다 **데이터를 빠르고 똑똑하게 찾는 것**이 중요해질 때 사용합니다.
+
+---
 
 ## 4. Elasticsearch를 RDB와 비교해서 이해하기
 Elasticsearch도 데이터를 저장하지만, 전통적인 RDB와 목적이 다르다.
@@ -89,11 +95,78 @@ GET /products/_search
 
 처음 보면 SQL에 비해 낯설지만, Elasticsearch는 검색 조건이 복잡해질수록 Query DSL의 장점이 커진다.
 
-## 5. Elasticsearch는 언제 쓰는가?
+---
 
+## 5. Elasticsearch는 언제 쓰는가?
+|**사용 사례**|**설명**|
+|:---:|:---|
+|쇼핑몰 상품 검색|상품명, 브랜드명, 카테고리, 설명 검색|
+|게시판 검색|제목, 내용, 작성자 검색|
+|자동완성|검색창에 일부 단어를 입력하면 추천어 표시|
+|로그 분석|서버 로그, 에러 로그, 접속 로그 검색|
+|모니터링|서버 상태, API 응답 시간, 장애 원인 분석|
+|보안 분석|비정상 로그인, 공격 패턴 감지|
+|AI 검색|벡터 검색, 의미 기반 검색, RAG 검색|
+
+예를 들어 쇼핑몰에서는 상품 데이터의 원본은 PostgreSQL에 저장하고, 검색용 데이터는 Elasticsearch에 따로 넣는 구조를 많이 사용한다.
+
+```
+PostgreSQL
+-> 주문, 결제, 상품 원본 데이터 저장
+
+Elasticsearch
+-> 상품 검색용 데이터 저장
+```
+
+즉, Elasticsearch가 RDB를 완전히 대체한다기보다는 보통 다음처럼 같이 사용한다.
+
+```
+RDB = 원본 저장소
+Elasticsearch = 검색 전용 저장소
+```
+
+---
 
 ## 6. Elasticsearch의 핵심 개념
 
+<img width="560" height="456" alt="image" src="https://github.com/user-attachments/assets/d1182582-ed33-4cf6-969b-89f8027612c3" />
+
+|**용어**|**RDB와 매칭**|
+|:---:|:---|
+|Index|Table|
+|Document|Row|
+|Field|Column|
+|Mapping|Table schema|
+|Query DSL|SQL|
+|Cluster|여러 Elasticsearch 서버 묶음|
+|Node|Elasticsearch 서버 한 대|
+|Shard|인덱스를 나눈 조각|
+|Replica|Shard의 복제본|
+
+<img width="512" height="417" alt="image" src="https://github.com/user-attachments/assets/2d42991f-68df-4132-980c-778c8a3cdedf" />
+
+예를 들어 `products`라는 상품 인덱스가 있다고 하면 다음과 같이 볼 수 있다.
+
+```
+products 인덱스
+ ├── document 1: { "name": "검정 반팔 티셔츠", "price": 19000 }
+ ├── document 2: { "name": "흰색 셔츠", "price": 29000 }
+ └── document 3: { "name": "여름 반팔 니트", "price": 39000 }
+```
+
+RDB 관점으로 보면 대략 이런 느낌이다.
+
+```
+product 테이블
+ ├── row 1
+ ├── row 2
+ └── row 3
+```
+
+다만 완전히 같은 것은 아니다.
+Elasticsearch의 Document는 JSON 형태이고, 검색을 위해 내부적으로 분석 과정을 거쳐 저장된다.
+
+---
 
 ## 7. Elasticsearch가 검색이 빠른 이유
 
