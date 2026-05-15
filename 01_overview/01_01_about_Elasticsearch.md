@@ -171,11 +171,17 @@ Elasticsearch의 Document는 JSON 형태이고, 검색을 위해 내부적으로
 ## 7. Elasticsearch가 검색이 빠른 이유
 
 
+---
+
 ## 8. Apache Lucene이란?
 
 
+---
+
 ## 9. Elasticsearch와 Apache Lucene의 관계
 
+
+---
 
 ## 10. Apache Lucene의 주요 특징
 
@@ -203,7 +209,9 @@ Elasticsearch의 Document는 JSON 형태이고, 검색을 위해 내부적으로
 ### 8) 벡터 검색 지원
 
 
+---
 ## 11. Elasticsearch 이해하기
 
 
+---
 ## 12. 정리
