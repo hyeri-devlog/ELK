@@ -224,7 +224,32 @@ Elasticsearch도 비슷하다.
 ---
 
 ## 8. Apache Lucene이란?
+Elasticsearch를 이해하려면 Apache Lucene도 알아야 한다.  
+**`Apache Lucene`는 Java로 작성된 고성능 검색 라이브러리**이다.  
 
+Apache Lucene 공식 문서에서는 Lucene Core를 강력한 색인과 검색 기능, spellchecking,
+hit highlighting, 분석과 토큰화 기능을 제공하는 Java 라이브러리라고 설명한다.  
+
+더 쉽게 말하자면,  
+Lucene은 검색 엔진을 만들기 위한 핵심 부품(예 - 자동차 엔진)이고,  
+Elasticsearch는 그 Lucene을 사용해서 분산 검색 엔진으로 만든 제품(예 - 자동차)이다.  
+
+Lucene 자체는 매우 강력하지만, 라이브러리이다.  
+즉, 개발자가 직접 Java 코드로 Lucene을 사용해서 검색 시스템을 만들어야 한다.  
+반면, Elasticsearch는 Lucene을 내부에 사용하면서도 다음 기능을 제공한다.
+
+- HTTP API
+- JSON 기반 요청/응답
+- 클러스터 구성
+- 분산 저장
+- 샤딩
+- 복제
+- 장애 복구
+- Kibana 연동
+- 보안 기능
+- 운영 관리 기능
+
+그래서 실무에서는 Lucene을 직접 쓰기보다는 Elasticsearch를 사용하는 경우가 많다.
 
 ---
 
