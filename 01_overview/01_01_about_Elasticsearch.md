@@ -254,7 +254,39 @@ Lucene 자체는 매우 강력하지만, 라이브러리이다.
 ---
 
 ## 9. Elasticsearch와 Apache Lucene의 관계
+Elasticsearch는 내부적으로 Apache Lucene을 사용한다.  
+Apache Lucene Core 공식 설명에서도 Lucene은 구조화 검색, 전문 검색, faceting, 고차원 벡터의 nearet-neighbor search,
+맞춤법 교정, query suggestion 등에 적합한 고성능 검색 엔진 라이브러리라고 설명한다.  
 
+관계를 도식으로 표현하면 아래와 같다.
+
+```
+사용자 / 애플리케이션
+        ↓
+SpringBoot 서버
+        ↓
+Elasticsearch REST API
+        ↓
+Elasticsearch
+        ↓
+Apache Lucene
+        ↓
+역색인 / 검색 처리
+```
+
+SpringBoot 애플리케이션은 보통 Elasticsearch에 HTTP 요청을 보낸다.  
+
+```
+"노트북 검색해줘."
+```
+
+그러면 Elasticsearch는 내부적으로 Lucene을 사용해서 실제 검색을 수행한다.
+
+```
+Lucene이 역색인에서 노트북이 들어 있는 문서를 찾음
+```
+
+그리고 Elasticsearch는 검색 결과를 JSON으로 돌려준다.
 
 ---
 
