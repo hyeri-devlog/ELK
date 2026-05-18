@@ -254,6 +254,9 @@ Lucene 자체는 매우 강력하지만, 라이브러리이다.
 ---
 
 ## 9. Elasticsearch와 Apache Lucene의 관계
+
+<img width="701" height="301" alt="image" src="https://github.com/user-attachments/assets/bb9db5b5-e05b-4a8e-a433-ffbef45142e3" />
+
 Elasticsearch는 내부적으로 Apache Lucene을 사용한다.  
 Apache Lucene Core 공식 설명에서도 Lucene은 구조화 검색, 전문 검색, faceting, 고차원 벡터의 nearet-neighbor search,
 맞춤법 교정, query suggestion 등에 적합한 고성능 검색 엔진 라이브러리라고 설명한다.  
