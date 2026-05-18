@@ -21,7 +21,7 @@ List<Product> result = queryFactory
 
 즉, **Java 코드로 SQL/JPQL을 안전하게 작성하는 도구**이다.
 
---
+---
 
 ## 2️⃣ Elasticsearch의 Query DSL
 Elasticsearch의 `Query DSL`은 JSON 기반 검색 문법이다.  
